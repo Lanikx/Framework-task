@@ -1,13 +1,12 @@
 ﻿using NUnit.Framework;
 using OnlinerTests.PageObjects;
-using OnlinerTests.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlinerTests.Selenium_tests.Tests
+namespace OnlinerTests.Tests
 {
     internal class MainPageTests : BaseTest
     {

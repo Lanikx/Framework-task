@@ -7,7 +7,7 @@ using System.Threading;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-namespace OnlinerTests.Tests
+namespace OnlinerTests.PageObjects.Basic
 {
     public class WebDriverProvider
     {
@@ -23,7 +23,7 @@ namespace OnlinerTests.Tests
 
         public void Start()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig());           
+            new DriverManager().SetUpDriver(new ChromeConfig());
             ChromeOptions options = new ChromeOptions();
             //options.AddArgument("--headless");
             options.AddArgument("disable-gpu");

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OnlinerTests.PageObjects.Basic;
 
 namespace OnlinerTests.Tests
 {

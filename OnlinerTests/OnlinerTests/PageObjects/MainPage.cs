@@ -1,5 +1,6 @@
-﻿using WebElement = OnlinerTests.Selenium_tests.PageObjects.WebElement.WebElement;
+﻿using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 using IWebDriver = OpenQA.Selenium.IWebDriver;
+using OnlinerTests.PageObjects.Basic;
 
 namespace OnlinerTests.PageObjects
 {

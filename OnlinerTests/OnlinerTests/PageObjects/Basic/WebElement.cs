@@ -1,33 +1,31 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace OnlinerTests.Selenium_tests.PageObjects.WebElement
+namespace OnlinerTests.PageObjects.Basic
 {
     public class WebElement
     {
         private IWebElement _element;
         private List<IWebElement> _elements;
         private IWebDriver _driver;
-        private SearchStrategy _strategy;
-        private string _searchValue;
+        private By _strategy;
         private WebDriverWait wait;
 
-        public WebElement(IWebDriver driver, SearchStrategy strategy, string searchValue)
+        public WebElement(IWebDriver driver, By strategy)
         {
             _driver = driver;
             _strategy = strategy;
-            _searchValue = searchValue;
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         private void InitElement()
         {
-            _element = _driver.FindElement(Using(_strategy));
+            _element = _driver.FindElement(_strategy);
         }
 
         private void InitElements()
         {
-            _elements = _driver.FindElements(Using(_strategy)).ToList<IWebElement>();
+            _elements = _driver.FindElements(_strategy).ToList();
         }
 
         public IWebElement GetElement()
@@ -50,19 +48,9 @@ namespace OnlinerTests.Selenium_tests.PageObjects.WebElement
             return _elements;
         }
 
-        private By Using(SearchStrategy strategy)
-        {
-            switch (strategy)
-            {
-                case SearchStrategy.Xpath: return By.XPath(_searchValue);
-                case SearchStrategy.CssSelector: return By.CssSelector(_searchValue);
-                default: return By.XPath(_searchValue);
-            }
-        }
-
         private Func<IWebDriver, bool> ElementIsInDom()
         {
-            return drv => _driver.FindElements(Using(_strategy)).Count != 0;
+            return drv => _driver.FindElements(_strategy).Count != 0;
         }
 
         public bool IsElementInDom()
