@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
 using OnlinerTests.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlinerTests.Tests
 {

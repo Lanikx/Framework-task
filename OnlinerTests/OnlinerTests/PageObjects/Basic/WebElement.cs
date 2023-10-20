@@ -5,11 +5,22 @@ namespace OnlinerTests.PageObjects.Basic
 {
     public class WebElement
     {
-        private IWebElement _element;
-        private List<IWebElement> _elements;
+        private IWebElement? _element;
+        private List<IWebElement>? _elements;
         private IWebDriver _driver;
         private By _strategy;
         private WebDriverWait wait;
+
+        public IWebElement Element { 
+            get {
+                if (_element == null)
+                {
+                    wait.Until(ElementIsInDom());
+                    InitElement();
+                }
+                return _element;
+            } 
+        }
 
         public WebElement(IWebDriver driver, By strategy)
         {
@@ -26,16 +37,6 @@ namespace OnlinerTests.PageObjects.Basic
         private void InitElements()
         {
             _elements = _driver.FindElements(_strategy).ToList();
-        }
-
-        public IWebElement GetElement()
-        {
-            if (_element == null)
-            {
-                wait.Until(ElementIsInDom());
-                InitElement();
-            }
-            return _element;
         }
 
         public List<IWebElement> GetElements()

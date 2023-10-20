@@ -8,8 +8,6 @@ namespace OnlinerTests.Tests
 
         protected WebDriverProvider provider = new WebDriverProvider();
 
-        protected object[] data;
-
         [SetUp]
         public void AhShitHereWeGoAgain()
         {
