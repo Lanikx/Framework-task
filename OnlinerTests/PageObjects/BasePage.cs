@@ -4,13 +4,9 @@ namespace OnlinerTests.PageObjects
 {
     class BasePage
     {
-        protected readonly IWebDriver driver;
 
-        public BasePage(IWebDriver driver, string pageUrl)
+        public BasePage()
         {
-            this.driver = driver;
-            this.driver.Navigate().GoToUrl(pageUrl);
-            this.driver.Manage().Window.Maximize();
         }
 
         public BasePage(IWebDriver driver)
