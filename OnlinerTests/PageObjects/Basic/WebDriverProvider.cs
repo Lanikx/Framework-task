@@ -29,7 +29,17 @@ namespace OnlinerTests.PageObjects.Basic
         public static void Start()
         {
             Driver = null; // Not sure I get the idea
+            MaximizeWindow();
+        }
 
+        private static void MaximizeWindow()
+        {
+            Driver.Manage().Window.Maximize();
+        }
+
+        private static void GoToPage()
+        {
+            Driver.Navigate().GoToUrl("https://www.onliner.by/"); //not sure about this
         }
 
         public static IWebDriver CreateDriver()
@@ -41,9 +51,9 @@ namespace OnlinerTests.PageObjects.Basic
         }
 
 
-        public void Quit()
+        public static void Quit()
         {
-            driver.Quit();
+            Driver.Quit();
         }
     }
 }

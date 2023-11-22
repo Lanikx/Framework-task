@@ -1,8 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using OnlinerTests.PageObjects.Basic;
+using OpenQA.Selenium;
 
 namespace OnlinerTests.PageObjects
 {
-    class BasePage
+    public class BasePage
     {
 
         public BasePage()
@@ -11,12 +12,11 @@ namespace OnlinerTests.PageObjects
 
         public BasePage(IWebDriver driver)
         {
-            this.driver = driver;
         }
 
         public bool IsOnPage(string pageUrl)
         {
-            return driver.Url == pageUrl;
+            return WebDriverProvider.Driver.Url == pageUrl;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace OnlinerTests.Tests
 {
     class BaseTest
     {
-
         protected static IWebDriver driver = WebDriverProvider.Driver;
 
         protected object[] data;
@@ -14,13 +13,13 @@ namespace OnlinerTests.Tests
         [SetUp]
         public void AhSHereWeGoAgain()
         {
-            WebDriverProvider.Driver = null; // I have "setter" but not sure how to set it properly here.
+            WebDriverProvider.Start();
         }
 
         [TearDown]
         public void YouHadToFollowTheDamnTrainCJ()
         {
-            provider.Quit();
+            WebDriverProvider.Quit();
         }
 
         [OneTimeSetUp]

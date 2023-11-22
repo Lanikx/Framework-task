@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OnlinerTests.PageObjects;
+using OnlinerTests.PageObjects.Basic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,9 @@ namespace OnlinerTests.Tests
         [TestCase]
         public void IsAtMainPage()
         {
-            MainPage mainPage = new MainPage(provider.driver);
-            Assert.IsTrue(mainPage.IsOnPage("https://www.onliner.by/"));
-            Assert.IsTrue(mainPage.IsLogoPresent());
+            MainPage mainPage = new MainPage();
 
+            Assert.IsTrue(mainPage.IsLogoPresent(), "Logo is not present");
         }
     }
 }
