@@ -1,12 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace OnlinerTests.PageObjects.Basic
 {
@@ -22,13 +15,13 @@ namespace OnlinerTests.PageObjects.Basic
             }
             set
             {
-                _storedDriver.Value = CreateDriver();
+                _storedDriver.Value = value;
             }
         }
 
         public static void Start()
         {
-            Driver = null; // Not sure I get the idea
+            Driver = CreateDriver(); 
             MaximizeWindow();
         }
 
@@ -37,19 +30,12 @@ namespace OnlinerTests.PageObjects.Basic
             Driver.Manage().Window.Maximize();
         }
 
-        private static void GoToPage()
-        {
-            Driver.Navigate().GoToUrl("https://www.onliner.by/"); //not sure about this
-        }
-
         public static IWebDriver CreateDriver()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig());
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("disable-gpu");
-            return new ChromeDriver(ChromeDriverService.CreateDefaultService(), options, TimeSpan.FromMinutes(5));
+            return new ChromeDriver("D:\\", options, TimeSpan.FromMinutes(5));
         }
-
 
         public static void Quit()
         {

@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using AngleSharp.Dom;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using static OnlinerTests.PageObjects.Basic.WebDriverExtension;
 
@@ -8,24 +10,48 @@ namespace OnlinerTests.PageObjects.Basic
     {
         private IWebElement _element;
         private List<IWebElement> _elements;
-        private static IWebDriver currentDriver => WebDriverProvider.Driver;
+        private static IWebDriver _currentDriver => WebDriverProvider.Driver;
         private By _strategy;
 
-        public WebElement(IWebDriver driver, By strategy)
+        public bool Enabled
+        {
+            get
+            {
+                if (_element == null)
+                {
+                    InitElement();
+                }
+                return _element.Enabled;
+            }
+        }
+
+        public bool Displayed 
+        { 
+            get
+            {
+                if (_element == null)
+                {
+                    InitElement();
+                }
+                return _element.Displayed;
+            } 
+        }
+
+        public WebElement(By strategy)
         {
             _strategy = strategy;
         }
 
         private void InitElement()
         {
-            currentDriver.GetWait().Until(drv => currentDriver.FindElements(_strategy).Count() != 0);
-            _element = currentDriver.FindElement(_strategy);
+            _currentDriver.GetWait().Until(drv => drv.FindElements(_strategy).Count() != 0);
+            _element = _currentDriver.FindElement(_strategy);
         }
 
         private void InitElements()
         {
-            currentDriver.GetWait().Until(drv => currentDriver.FindElements(_strategy).Count() != 0);
-            _elements = currentDriver.FindElements(_strategy).ToList();
+            _currentDriver.GetWait().Until(drv => drv.FindElements(_strategy).Count() != 0);
+            _elements = _currentDriver.FindElements(_strategy).ToList();
         }
 
         public IWebElement GetElement()
@@ -44,6 +70,20 @@ namespace OnlinerTests.PageObjects.Basic
                 InitElements();
             }
             return _elements;
+        }
+
+        public void Click()
+        {
+            if (_element == null)
+            {
+                InitElement();
+            }
+            _currentDriver.GetActions().Click(_element).Perform();
+        }
+
+        public void ScrollToElement()
+        {
+            _currentDriver.GetActions().MoveToElement(GetElement());
         }
     }
 }

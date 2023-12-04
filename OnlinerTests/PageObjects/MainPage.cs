@@ -1,42 +1,51 @@
-﻿using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
+﻿using OnlinerTests.PageObjects.Basic;
 using IWebDriver = OpenQA.Selenium.IWebDriver;
-using OnlinerTests.PageObjects.Basic;
 using OpenQA.Selenium;
+using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
     class MainPage : BasePage
     {
+        private static IWebDriver _driver = WebDriverProvider.Driver;
         public MainPage() : base()
         {
-
+            _driver.Navigate().GoToUrl("https://catalog.onliner.by/");
         }
-        private WebElement electronicsSection => new WebElement(WebDriverProvider.Driver, By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
 
-        private WebElement onlinerLogo => new WebElement(WebDriverProvider.Driver, By.XPath("//div/a/img[@class='onliner_logo']"));
+        private WebElement _pageTitle => new WebElement(By.XPath("//div[@class='catalog-navigation__title' and contains(text(),'Каталог')]"));
 
-        private WebElement phonesAndAccessoriesSubsection => new WebElement(WebDriverProvider.Driver, By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
+        private WebElement _electronicsSection => new WebElement(By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
 
-        private WebElement smartphonesSubSubSection => new WebElement(WebDriverProvider.Driver, By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
+        private WebElement _onlinerLogo => new WebElement(By.XPath("//div/a/img[@class='onliner_logo']"));
+
+        private WebElement _phonesAndAccessoriesSubsection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
+
+        private WebElement _smartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
 
         public bool IsLogoPresent()
         {
-            return onlinerLogo.GetElement().Displayed; 
+            return _onlinerLogo.Displayed; 
         }
 
         public void ClickElectronicsSection()
         {
-            electronicsSection.GetElement().Click();
+            _electronicsSection.Click();
         }
 
         public void ClickPhonesAndAccessoriesSubsection()
         {
-            phonesAndAccessoriesSubsection.GetElement().Click();
+            _phonesAndAccessoriesSubsection.Click();
         }
 
         public void ClickSmartphonesSubSubSection()
         {
-            smartphonesSubSubSection.GetElement().Click();
+            _smartphonesSubSubSection.Click();
+        }
+
+        public override bool IsOnPage()
+        {
+            return _pageTitle.Displayed;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace OnlinerTests.PageObjects.Basic
@@ -11,5 +12,7 @@ namespace OnlinerTests.PageObjects.Basic
         {
             return new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
+
+        public static Actions GetActions(this IWebDriver driver) {  return new Actions(driver); }
     }
 }

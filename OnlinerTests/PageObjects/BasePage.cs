@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace OnlinerTests.PageObjects
 {
-    public class BasePage
+    public abstract class BasePage
     {
 
         public BasePage()
@@ -14,9 +14,6 @@ namespace OnlinerTests.PageObjects
         {
         }
 
-        public bool IsOnPage(string pageUrl)
-        {
-            return WebDriverProvider.Driver.Url == pageUrl;
-        }
+        public abstract bool IsOnPage();
     }
 }

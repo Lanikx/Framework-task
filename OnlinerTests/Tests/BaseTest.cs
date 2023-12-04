@@ -6,8 +6,6 @@ namespace OnlinerTests.Tests
 {
     class BaseTest
     {
-        protected static IWebDriver driver = WebDriverProvider.Driver;
-
         protected object[] data;
 
         [SetUp]
