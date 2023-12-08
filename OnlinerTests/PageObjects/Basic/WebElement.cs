@@ -103,5 +103,23 @@ namespace OnlinerTests.PageObjects.Basic
             }
             _element.Clear();
         }
+
+        public void WaitIsDisplayed()
+        {
+            if (_element == null)
+            {
+                InitElement();
+            }
+            _currentDriver.GetWait().Until(el => _element.Displayed);
+        }
+
+        public string GetText()
+        {
+            if (_element == null)
+            {
+                InitElement();
+            }
+            return _element.Text;
+        }
     }
 }

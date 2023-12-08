@@ -21,7 +21,11 @@ namespace OnlinerTests.PageObjects
 
         private WebElement _phonesAndAccessoriesSubsection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
 
+        private WebElement _videoGamesSubSection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(), 'Видеоигры')]"));
+
         private WebElement _smartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
+
+        private WebElement _gameConsolesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Видеоигры')]/..//span[contains(text(), 'Игровые приставки')]"));
 
         private WebElement _signInButton => new WebElement(By.XPath("//div[contains(text(),'Вход')]"));
 
@@ -53,6 +57,17 @@ namespace OnlinerTests.PageObjects
         public void ClickSignInButton()
         {
             _signInButton.Click();
+        }
+
+        internal void ClickVideoGamesSubSection()
+        {
+            _videoGamesSubSection.WaitIsDisplayed();
+            _videoGamesSubSection.Click();
+        }
+
+        internal void ClickGameConsolesSubSubSection()
+        {
+            _gameConsolesSubSubSection.Click();
         }
     }
 }
