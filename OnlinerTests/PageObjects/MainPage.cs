@@ -23,6 +23,8 @@ namespace OnlinerTests.PageObjects
 
         private WebElement _smartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
 
+        private WebElement _signInButton => new WebElement(By.XPath("//div[contains(text(),'Вход')]"));
+
         public bool IsLogoPresent()
         {
             return _onlinerLogo.Displayed; 
@@ -46,6 +48,11 @@ namespace OnlinerTests.PageObjects
         public override bool IsOnPage()
         {
             return _pageTitle.Displayed;
+        }
+
+        public void ClickSignInButton()
+        {
+            _signInButton.Click();
         }
     }
 }

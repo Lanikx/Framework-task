@@ -85,5 +85,23 @@ namespace OnlinerTests.PageObjects.Basic
         {
             _currentDriver.GetActions().MoveToElement(GetElement());
         }
+
+        public void SendKeys(string keys)
+        {
+            if (_element == null)
+            {
+                InitElement();
+            }
+            _element.SendKeys(keys);
+        }
+
+        public void Clear()
+        {
+            if (_element == null)
+            {
+                InitElement();
+            }
+            _element.Clear();
+        }
     }
 }
