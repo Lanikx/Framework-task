@@ -13,10 +13,11 @@ namespace OnlinerTests.Tests
         }
 
         [TearDown]
-        public void TearDown() 
+        public void TearDown()
         {
             Screenshot ss = ((ITakesScreenshot)WebDriverProvider.Driver).GetScreenshot();
-            string Runname = DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
+            var testName = TestContext.CurrentContext.Test.Name;
+            string Runname = testName + " " + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string screenshotfilename = "D:\\screenshots\\" + Runname + ".jpg";
             ss.SaveAsFile(screenshotfilename, ScreenshotImageFormat.Jpeg);
         }

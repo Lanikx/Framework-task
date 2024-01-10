@@ -13,19 +13,19 @@ namespace OnlinerTests.PageObjects
 
         private string _sortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
 
-        private WebElement _cellphoneHeader => new WebElement(By.XPath("//h1[contains(text(),'Мобильные телефоны')]"));
+        private WebElement CellphoneHeader => new WebElement(By.XPath("//h1[contains(text(),'Мобильные телефоны')]"));
 
-        private WebElement _sortingOption => new WebElement(By.XPath("//a[@class='schema-order__link']"));
+        private WebElement SortingOption => new WebElement(By.XPath("//a[@class='schema-order__link']"));
 
-        private WebElement _firstItemProposes => new WebElement(By.XPath("//div/a[contains(text(), 'предлож')]"));
+        private WebElement FirstItemProposes => new WebElement(By.XPath("//div/a[contains(text(), 'предлож')]"));
 
-        private WebElement _itemName => new WebElement(By.XPath("//span[@data-bind='html: product.extended_name || product.full_name']"));
+        private WebElement ItemName => new WebElement(By.XPath("//span[@data-bind='html: product.extended_name || product.full_name']"));
 
-        private WebElement _itemsPrice => new WebElement(By.XPath("//a[@class='schema-product__price-value schema-product__price-value_primary js-product-price-link']"));
+        private WebElement ItemsPrice => new WebElement(By.XPath("//a[@class='schema-product__price-value schema-product__price-value_primary js-product-price-link']"));
 
         public void ClickOnSortingOption()
         {
-            _sortingOption.Click();
+            SortingOption.Click();
         }
 
         public void SelectManufacturer(string manufacturerName)
@@ -37,6 +37,7 @@ namespace OnlinerTests.PageObjects
         public void SelectSortingBy(string option)
         {
             var sortByOption = new WebElement(By.XPath(string.Format(_sortByOption, option)));
+            sortByOption.WaitIsDisplayed();
             sortByOption.Click();
         }
 
@@ -48,24 +49,25 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return _cellphoneHeader.Displayed;
+            return CellphoneHeader.Displayed;
         }
 
         public IEnumerable<double> GetItemsPrices()
         {
             Regex regex = new Regex("[0-9]+,[0-9]+", RegexOptions.IgnoreCase);
-            var itemsPrices = from price in _itemsPrice.GetElements() select double.Parse(regex.Match(price.Text).Value);
+            var priceElements = ItemsPrice.GetElements();
+            var itemsPrices = from price in ItemsPrice.GetElements() select double.Parse(regex.Match(price.Text).Value);
             return itemsPrices;
         }
 
         public string GetFirstItemName()
         {
-            return _itemName.GetText();
+            return ItemName.GetText();
         }
 
         public void ClickFirstItemProposesButton()
         {
-            _firstItemProposes.Click();
+            FirstItemProposes.Click();
         }
     }
 }

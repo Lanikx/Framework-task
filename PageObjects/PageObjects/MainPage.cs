@@ -13,61 +13,61 @@ namespace OnlinerTests.PageObjects
             _driver.Navigate().GoToUrl("https://catalog.onliner.by/");
         }
 
-        private WebElement _pageTitle => new WebElement(By.XPath("//div[@class='catalog-navigation__title' and contains(text(),'Каталог')]"));
+        private WebElement PageTitle => new WebElement(By.XPath("//div[@class='catalog-navigation__title' and contains(text(),'Каталог')]"));
 
-        private WebElement _electronicsSection => new WebElement(By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
+        private WebElement ElectronicsSection => new WebElement(By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
 
-        private WebElement _onlinerLogo => new WebElement(By.XPath("//div/a/img[@class='onliner_logo']"));
+        private WebElement OnlinerLogo => new WebElement(By.XPath("//div/a/img[@class='onliner_logo']"));
 
-        private WebElement _phonesAndAccessoriesSubsection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
+        private WebElement PhonesAndAccessoriesSubsection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
 
-        private WebElement _videoGamesSubSection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(), 'Видеоигры')]"));
+        private WebElement VideoGamesSubSection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(), 'Видеоигры')]"));
 
-        private WebElement _smartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
+        private WebElement SmartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
 
-        private WebElement _gameConsolesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Видеоигры')]/..//span[contains(text(), 'Игровые приставки')]"));
+        private WebElement GameConsolesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Видеоигры')]/..//span[contains(text(), 'Игровые приставки')]"));
 
-        private WebElement _signInButton => new WebElement(By.XPath("//div[contains(text(),'Вход')]"));
+        private WebElement SignInButton => new WebElement(By.XPath("//div[contains(text(),'Вход')]"));
 
         public bool IsLogoPresent()
         {
-            return _onlinerLogo.Displayed; 
+            return OnlinerLogo.Displayed; 
         }
 
         public void ClickElectronicsSection()
         {
-            _electronicsSection.Click();
+            ElectronicsSection.Click();
         }
 
         public void ClickPhonesAndAccessoriesSubsection()
         {
-            _phonesAndAccessoriesSubsection.Click();
+            PhonesAndAccessoriesSubsection.Click();
         }
 
         public void ClickSmartphonesSubSubSection()
         {
-            _smartphonesSubSubSection.Click();
+            SmartphonesSubSubSection.Click();
         }
 
         public override bool IsOnPage()
         {
-            return _pageTitle.Displayed;
+            return PageTitle.Displayed;
         }
 
         public void ClickSignInButton()
         {
-            _signInButton.Click();
+            SignInButton.Click();
         }
 
         public void ClickVideoGamesSubSection()
         {
-            _videoGamesSubSection.WaitIsDisplayed();
-            _videoGamesSubSection.Click();
+            VideoGamesSubSection.WaitIsDisplayed();
+            VideoGamesSubSection.Click();
         }
 
         public void ClickGameConsolesSubSubSection()
         {
-            _gameConsolesSubSubSection.Click();
+            GameConsolesSubSubSection.Click();
         }
     }
 }

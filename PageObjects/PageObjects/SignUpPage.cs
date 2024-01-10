@@ -5,63 +5,63 @@ namespace OnlinerTests.PageObjects
 {
     public class SignUpPage
     {
-        private WebElement _registerLink => new WebElement(By.XPath("//a[contains(text(),'Зарегистрироваться')]"));
+        private WebElement RegisterLink => new WebElement(By.XPath("//a[contains(text(),'Зарегистрироваться')]"));
 
-        private WebElement _registerEmailInput => new WebElement(By.XPath("//input[@type='email']"));
+        private WebElement RegisterEmailInput => new WebElement(By.XPath("//input[@type='email']"));
 
-        private WebElement _registerPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder,'Придумайте')]"));
+        private WebElement RegisterPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder,'Придумайте')]"));
 
-        private WebElement _incorrectEmailErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Некорректный e-mail')]"));
+        private WebElement IncorrectEmailErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Некорректный e-mail')]"));
 
-        private WebElement _shortPasswordErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Минимум 8 ')]"));
+        private WebElement ShortPasswordErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Минимум 8 ')]"));
 
-        private WebElement _repeatPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder, 'Повторите')]"));
+        private WebElement RepeatPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder, 'Повторите')]"));
 
-        private WebElement _passwordsDontMatchErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Пароли не совпадают')]"));
+        private WebElement PasswordsDontMatchErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Пароли не совпадают')]"));
 
         public void ClickGoToRegisterForm()
         {
-            _registerLink.Click();
+            RegisterLink.Click();
         }
 
         public void InputEmail(string inputString) 
         {
-            _registerEmailInput.SendKeys(inputString);
+            RegisterEmailInput.SendKeys(inputString);
         }
 
         public void ClearEmail()
         {
-            _registerEmailInput.Clear();
+            RegisterEmailInput.Clear();
         }
 
         public void InputPassword(string inputString)
         {
-            _registerPasswordInput.SendKeys(inputString);
+            RegisterPasswordInput.SendKeys(inputString);
         }
 
         public void ClearPassword()
         {
-            _registerPasswordInput.Clear();
+            RegisterPasswordInput.Clear();
         }
 
         public bool IsEmailErrorPresent()
         {
-            return _incorrectEmailErrorMessage.Displayed;
+            return IncorrectEmailErrorMessage.Displayed;
         }
 
         public bool IsPasswordErrorPresent()
         {
-            return _shortPasswordErrorMessage.Displayed;
+            return ShortPasswordErrorMessage.Displayed;
         }
 
         public void InputPasswordRepeat(string input)
         {
-            _repeatPasswordInput.SendKeys(input);
+            RepeatPasswordInput.SendKeys(input);
         }
 
         public bool IsPasswordsDontMatchErrorPresent()
         {
-            return _passwordsDontMatchErrorMessage.Displayed;
+            return PasswordsDontMatchErrorMessage.Displayed;
         }
     }
 }
