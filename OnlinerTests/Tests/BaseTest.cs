@@ -6,13 +6,13 @@ namespace OnlinerTests.Tests
 {
     public class BaseTest
     {
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             WebDriverProvider.Start();
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             WebDriverProvider.Quit();
