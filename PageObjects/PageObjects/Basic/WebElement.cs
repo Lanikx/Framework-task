@@ -1,8 +1,4 @@
-﻿using AngleSharp.Dom;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using static OnlinerTests.PageObjects.Basic.WebDriverExtension;
+﻿using OpenQA.Selenium;
 
 namespace OnlinerTests.PageObjects.Basic
 {
@@ -25,8 +21,8 @@ namespace OnlinerTests.PageObjects.Basic
             }
         }
 
-        public bool Displayed 
-        { 
+        public bool Displayed
+        {
             get
             {
                 if (_element == null)
@@ -34,7 +30,7 @@ namespace OnlinerTests.PageObjects.Basic
                     InitElement();
                 }
                 return _element.Displayed;
-            } 
+            }
         }
 
         public WebElement(By strategy)
@@ -56,28 +52,19 @@ namespace OnlinerTests.PageObjects.Basic
 
         public IWebElement GetElement()
         {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            SetElement();
             return _element;
         }
 
         public List<IWebElement> GetElements()
         {
-            if (_elements == null)
-            {
-                InitElements();
-            }
+            SetElement();
             return _elements;
         }
 
         public void Click()
         {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            SetElement();
             _currentDriver.GetActions().Click(_element).Perform();
         }
 
@@ -88,38 +75,34 @@ namespace OnlinerTests.PageObjects.Basic
 
         public void SendKeys(string keys)
         {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            SetElement();
             _element.SendKeys(keys);
         }
 
         public void Clear()
         {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            SetElement();
             _element.Clear();
         }
 
         public void WaitIsDisplayed()
         {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            SetElement();
             _currentDriver.GetWait().Until(el => _element.Displayed);
         }
 
         public string GetText()
         {
+            SetElement();
+            return _element.Text;
+        }
+
+        private void SetElement()
+        {
             if (_element == null)
             {
                 InitElement();
             }
-            return _element.Text;
         }
     }
 }

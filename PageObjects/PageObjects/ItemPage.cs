@@ -3,9 +3,8 @@ using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
-    internal class ItemPage : BasePage
+    public class ItemPage : BasePage
     {
-
         private WebElement _itemTitleHeader => new WebElement(By.XPath("//h1[@class = 'catalog-masthead__title js-nav-header']"));
 
         private WebElement _firstAddToBasket => new WebElement(By.XPath("//div[contains(@class,'offers-list__control offers-list__control_default helpers_hide_tablet')]/a[contains(text(),'В корзину')]"));
@@ -22,7 +21,7 @@ namespace OnlinerTests.PageObjects
             _firstAddToBasket.Click();
         }
 
-        internal void ClickGoToBasket()
+        public void ClickGoToBasket()
         {
             _goToBasketButton.Click();
         }

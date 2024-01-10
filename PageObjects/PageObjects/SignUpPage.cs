@@ -3,7 +3,7 @@ using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
-    internal class SignUpPage
+    public class SignUpPage
     {
         private WebElement _registerLink => new WebElement(By.XPath("//a[contains(text(),'Зарегистрироваться')]"));
 

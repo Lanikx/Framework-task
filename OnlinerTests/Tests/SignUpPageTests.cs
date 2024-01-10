@@ -3,7 +3,7 @@ using OnlinerTests.PageObjects;
 
 namespace OnlinerTests.Tests
 {
-    internal class SignUpPageTests : BaseTest
+    public class SignUpPageTests : BaseTest
     {
         [TestCase]
         public void CheckLoginFormTest()

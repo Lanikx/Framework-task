@@ -3,9 +3,8 @@ using OnlinerTests.PageObjects;
 
 namespace OnlinerTests.Tests
 {
-    internal class MainPageTests : BaseTest
+    public class MainPageTests : BaseTest
     {
-
         [TestCase]
         public void IsAtMainPage()
         {

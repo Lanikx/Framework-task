@@ -3,7 +3,7 @@ using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
-    internal class CartPage : BasePage
+    public class CartPage : BasePage
     {
         private WebElement _cartTitle => new WebElement(By.XPath("//div[contains(text(),'Корзина')]"));
 

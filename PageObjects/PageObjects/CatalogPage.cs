@@ -7,10 +7,11 @@ namespace OnlinerTests.PageObjects
 {
     public class CatalogPage : BasePage
     {
-        public CatalogPage() : base()
-        {
+        public CatalogPage() : base() { }
 
-        }
+        private string _manufacturerSelectOptionXpath = "//div[@class='schema-filter__facet']/ul//span[contains(text(),'{0}')]";
+
+        private string _sortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
 
         private WebElement _cellphoneHeader => new WebElement(By.XPath("//h1[contains(text(),'Мобильные телефоны')]"));
 
@@ -19,11 +20,6 @@ namespace OnlinerTests.PageObjects
         private WebElement _firstItemProposes => new WebElement(By.XPath("//div/a[contains(text(), 'предлож')]"));
 
         private WebElement _itemName => new WebElement(By.XPath("//span[@data-bind='html: product.extended_name || product.full_name']"));
-
-        private string _manufacturerSelectOptionXpath = "//div[@class='schema-filter__facet']/ul//span[contains(text(),'{0}')]";
-
-        private string _sortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
-
 
         private WebElement _itemsPrice => new WebElement(By.XPath("//a[@class='schema-product__price-value schema-product__price-value_primary js-product-price-link']"));
 
@@ -58,15 +54,16 @@ namespace OnlinerTests.PageObjects
         public IEnumerable<double> GetItemsPrices()
         {
             Regex regex = new Regex("[0-9]+,[0-9]+", RegexOptions.IgnoreCase);
-            return from price in _itemsPrice.GetElements() select double.Parse(regex.Match(price.Text).Value);
+            var itemsPrices = from price in _itemsPrice.GetElements() select double.Parse(regex.Match(price.Text).Value);
+            return itemsPrices;
         }
 
-        internal string GetFirstItemName()
+        public string GetFirstItemName()
         {
             return _itemName.GetText();
         }
 
-        internal void ClickFirstItemProposesButton()
+        public void ClickFirstItemProposesButton()
         {
             _firstItemProposes.Click();
         }

@@ -3,17 +3,17 @@ using OnlinerTests.PageObjects;
 
 namespace OnlinerTests.Tests
 {
-    internal class CatalogPageTests : BaseTest
+    public class CatalogPageTests : BaseTest
     {
         [TestCase]
         public void SortByPriceTest()
         {
-            MainPage mainPage = new MainPage();
+            var mainPage = new MainPage();
             Assert.IsTrue(mainPage.IsOnPage(), "User is not on main page");
             mainPage.ClickElectronicsSection();
             mainPage.ClickPhonesAndAccessoriesSubsection();
             mainPage.ClickSmartphonesSubSubSection();
-            CatalogPage catalogPage = new CatalogPage();
+            var catalogPage = new CatalogPage();
             Assert.IsTrue(catalogPage.IsOnPage(), "User is not on catalog page");
             catalogPage.ScrollManufacturersOptionIntoView("Xiaomi");
             catalogPage.SelectManufacturer("Xiaomi");
@@ -26,19 +26,19 @@ namespace OnlinerTests.Tests
         [TestCase]
         public void AddItemToBasketTest()
         {
-            MainPage mainPage = new MainPage();
+            var mainPage = new MainPage();
             mainPage.ClickElectronicsSection();
             mainPage.ClickVideoGamesSubSection();
             mainPage.ClickGameConsolesSubSubSection();
-            CatalogPage catalogPage = new CatalogPage();
-            string itemCatalogName = catalogPage.GetFirstItemName();
+            var catalogPage = new CatalogPage();
+            var itemCatalogName = catalogPage.GetFirstItemName();
             catalogPage.ClickFirstItemProposesButton();
-            ItemPage itemPage = new ItemPage();
+            var itemPage = new ItemPage();
             itemPage.ClickFirstAddToBasket();
             itemPage.ClickGoToBasket();
-            CartPage cartPage = new CartPage();
+            var cartPage = new CartPage();
             cartPage.IsOnPage();
-            string cartItemName = cartPage.GetFirstItemName();
+            var cartItemName = cartPage.GetFirstItemName();
             Assert.That(cartItemName, Is.EqualTo(itemCatalogName));
         }
     }

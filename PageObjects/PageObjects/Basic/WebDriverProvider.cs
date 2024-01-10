@@ -25,21 +25,21 @@ namespace OnlinerTests.PageObjects.Basic
             MaximizeWindow();
         }
 
-        private static void MaximizeWindow()
-        {
-            Driver.Manage().Window.Maximize();
-        }
-
         public static IWebDriver CreateDriver()
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("disable-gpu");
-            return new ChromeDriver("D:\\", options, TimeSpan.FromMinutes(5));
+            var newDriver = new ChromeDriver("D:\\", options, TimeSpan.FromMinutes(5));
+            return newDriver;
         }
 
         public static void Quit()
         {
             Driver.Quit();
+        }
+        private static void MaximizeWindow()
+        {
+            Driver.Manage().Window.Maximize();
         }
     }
 }

@@ -4,26 +4,18 @@ using OpenQA.Selenium;
 
 namespace OnlinerTests.Tests
 {
-    class BaseTest
+    public class BaseTest
     {
-        protected object[] data;
-
         [SetUp]
-        public void AhSHereWeGoAgain()
+        public void SetUp()
         {
             WebDriverProvider.Start();
         }
 
         [TearDown]
-        public void YouHadToFollowTheDamnTrainCJ()
+        public void TearDown()
         {
             WebDriverProvider.Quit();
-        }
-
-        [OneTimeSetUp]
-        public void ReadTheBook()
-        {
-            //no config book yet
         }
     }
 }

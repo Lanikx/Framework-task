@@ -5,14 +5,9 @@ namespace OnlinerTests.PageObjects
 {
     public abstract class BasePage
     {
+        public BasePage() { }
 
-        public BasePage()
-        {
-        }
-
-        public BasePage(IWebDriver driver)
-        {
-        }
+        public BasePage(IWebDriver driver) { }
 
         public abstract bool IsOnPage();
     }

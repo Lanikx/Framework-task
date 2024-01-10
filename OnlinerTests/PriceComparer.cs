@@ -1,8 +1,4 @@
-﻿
-
-using System.Collections;
-
-namespace OnlinerTests
+﻿namespace OnlinerTests
 {
     public class PriceComparer : IComparer<string>
     {

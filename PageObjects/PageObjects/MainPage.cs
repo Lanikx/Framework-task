@@ -5,7 +5,7 @@ using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
-    class MainPage : BasePage
+    public class MainPage : BasePage
     {
         private static IWebDriver _driver = WebDriverProvider.Driver;
         public MainPage() : base()
@@ -59,13 +59,13 @@ namespace OnlinerTests.PageObjects
             _signInButton.Click();
         }
 
-        internal void ClickVideoGamesSubSection()
+        public void ClickVideoGamesSubSection()
         {
             _videoGamesSubSection.WaitIsDisplayed();
             _videoGamesSubSection.Click();
         }
 
-        internal void ClickGameConsolesSubSubSection()
+        public void ClickGameConsolesSubSubSection()
         {
             _gameConsolesSubSubSection.Click();
         }
