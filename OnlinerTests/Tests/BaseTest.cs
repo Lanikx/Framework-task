@@ -12,8 +12,17 @@ namespace OnlinerTests.Tests
             WebDriverProvider.Start();
         }
 
+        [TearDown]
+        public void TearDown() 
+        {
+            Screenshot ss = ((ITakesScreenshot)WebDriverProvider.Driver).GetScreenshot();
+            string Runname = DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
+            string screenshotfilename = "D:\\screenshots\\" + Runname + ".jpg";
+            ss.SaveAsFile(screenshotfilename, ScreenshotImageFormat.Jpeg);
+        }
+
         [OneTimeTearDown]
-        public void TearDown()
+        public void OneTimeTearDown()
         {
             WebDriverProvider.Quit();
         }
