@@ -9,9 +9,9 @@ namespace OnlinerTests.PageObjects
     {
         public CatalogPage() : base() { }
 
-        private string _manufacturerSelectOptionXpath = "//div[@class='schema-filter__facet']/ul//span[contains(text(),'{0}')]";
+        private const string ManufacturerSelectOptionXpath = "//div[@class='schema-filter__facet']/ul//span[contains(text(),'{0}')]";
 
-        private string _sortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
+        private const string SortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
 
         private WebElement CellphoneHeader => new WebElement(By.XPath("//h1[contains(text(),'Мобильные телефоны')]"));
 
@@ -30,20 +30,20 @@ namespace OnlinerTests.PageObjects
 
         public void SelectManufacturer(string manufacturerName)
         {
-            var manufacturerSelectOption = new WebElement(By.XPath(string.Format(_manufacturerSelectOptionXpath, manufacturerName)));
+            var manufacturerSelectOption = new WebElement(By.XPath(string.Format(ManufacturerSelectOptionXpath, manufacturerName)));
             manufacturerSelectOption.Click();
         }
 
         public void SelectSortingBy(string option)
         {
-            var sortByOption = new WebElement(By.XPath(string.Format(_sortByOption, option)));
+            var sortByOption = new WebElement(By.XPath(string.Format(SortByOption, option)));
             sortByOption.WaitIsDisplayed();
             sortByOption.Click();
         }
 
         public void ScrollManufacturersOptionIntoView(string manufacturerName)
         {
-            var manufacturerSelectOption = new WebElement(By.XPath(string.Format(_manufacturerSelectOptionXpath, manufacturerName)));
+            var manufacturerSelectOption = new WebElement(By.XPath(string.Format(ManufacturerSelectOptionXpath, manufacturerName)));
             manufacturerSelectOption.ScrollToElement();
         }
 

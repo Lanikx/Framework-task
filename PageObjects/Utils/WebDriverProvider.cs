@@ -37,6 +37,7 @@ namespace OnlinerTests.PageObjects.Basic
         {
             Driver.Quit();
         }
+
         private static void MaximizeWindow()
         {
             Driver.Manage().Window.Maximize();

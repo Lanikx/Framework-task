@@ -1,13 +1,14 @@
-﻿using OnlinerTests.PageObjects.Basic;
-using IWebDriver = OpenQA.Selenium.IWebDriver;
+﻿using IWebDriver = OpenQA.Selenium.IWebDriver;
 using OpenQA.Selenium;
 using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
+using OnlinerTests.PageObjects.Basic;
 
 namespace OnlinerTests.PageObjects
 {
     public class MainPage : BasePage
     {
         private static IWebDriver _driver = WebDriverProvider.Driver;
+
         public MainPage() : base()
         {
             _driver.Navigate().GoToUrl("https://catalog.onliner.by/");

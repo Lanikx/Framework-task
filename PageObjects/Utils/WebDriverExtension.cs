@@ -6,10 +6,7 @@ namespace OnlinerTests.PageObjects.Basic
 {
     public static class WebDriverExtension
     {
-        public static WebDriverWait GetWait(this IWebDriver driver)
-        {
-            return new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
+        public static WebDriverWait GetWait(this IWebDriver driver) => new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
         public static Actions GetActions(this IWebDriver driver) =>  new Actions(driver); 
     }
