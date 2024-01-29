@@ -9,7 +9,7 @@ namespace OnlinerTests.PageObjects.Basic
         private static IWebDriver _currentDriver => WebDriverProvider.Driver;
         private By _strategy;
 
-        public bool Enabled
+        public IWebElement Element
         {
             get
             {
@@ -17,19 +17,19 @@ namespace OnlinerTests.PageObjects.Basic
                 {
                     InitElement();
                 }
-                return _element.Enabled;
+                return _element;
             }
         }
 
-        public bool Displayed
+        public List<IWebElement> Elements
         {
             get
             {
-                if (_element == null)
+                if (_elements.Count == 0)
                 {
-                    InitElement();
+                    InitElements();
                 }
-                return _element.Displayed;
+                return _elements;
             }
         }
 
@@ -50,59 +50,38 @@ namespace OnlinerTests.PageObjects.Basic
             _elements = _currentDriver.FindElements(_strategy).ToList();
         }
 
-        public IWebElement GetElement()
-        {
-            SetElement();
-            return _element;
-        }
+        public bool IsEnabled() => Element.Enabled;
 
-        public List<IWebElement> GetElements()
-        {
-            SetElement();
-            return _elements;
-        }
+        public bool IsDisplayed() => Element.Displayed;
 
         public void Click()
         {
-            SetElement();
-            _currentDriver.GetActions().Click(_element).Perform();
+            _currentDriver.GetActions().Click(Element).Perform();
         }
 
         public void ScrollToElement()
         {
-            _currentDriver.GetActions().MoveToElement(GetElement());
+            _currentDriver.GetActions().MoveToElement(Element);
         }
 
         public void SendKeys(string keys)
         {
-            SetElement();
-            _element.SendKeys(keys);
+            Element.SendKeys(keys);
         }
 
         public void Clear()
         {
-            SetElement();
-            _element.Clear();
+            Element.Clear();
         }
 
         public void WaitIsDisplayed()
         {
-            SetElement();
-            _currentDriver.GetWait().Until(el => _element.Displayed);
+            _currentDriver.GetWait().Until(el => Element.Displayed);
         }
 
         public string GetText()
         {
-            SetElement();
-            return _element.Text;
-        }
-
-        private void SetElement()
-        {
-            if (_element == null)
-            {
-                InitElement();
-            }
+            return Element.Text;
         }
     }
 }

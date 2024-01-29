@@ -46,12 +46,12 @@ namespace OnlinerTests.PageObjects
 
         public bool IsEmailErrorPresent()
         {
-            return IncorrectEmailErrorMessage.Displayed;
+            return IncorrectEmailErrorMessage.IsDisplayed();
         }
 
         public bool IsPasswordErrorPresent()
         {
-            return ShortPasswordErrorMessage.Displayed;
+            return ShortPasswordErrorMessage.IsDisplayed();
         }
 
         public void InputPasswordRepeat(string input)
@@ -61,7 +61,7 @@ namespace OnlinerTests.PageObjects
 
         public bool IsPasswordsDontMatchErrorPresent()
         {
-            return PasswordsDontMatchErrorMessage.Displayed;
+            return PasswordsDontMatchErrorMessage.IsDisplayed();
         }
     }
 }

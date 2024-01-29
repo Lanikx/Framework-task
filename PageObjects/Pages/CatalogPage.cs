@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
@@ -49,14 +48,14 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return CellphoneHeader.Displayed;
+            return CellphoneHeader.IsDisplayed();
         }
 
         public IEnumerable<double> GetItemsPrices()
         {
             Regex regex = new Regex("[0-9]+,[0-9]+", RegexOptions.IgnoreCase);
-            var priceElements = ItemsPrice.GetElements();
-            var itemsPrices = from price in ItemsPrice.GetElements() select double.Parse(regex.Match(price.Text).Value);
+            var priceElements = ItemsPrice.Elements;
+            var itemsPrices = from price in ItemsPrice.Elements select double.Parse(regex.Match(price.Text).Value);
             return itemsPrices;
         }
 

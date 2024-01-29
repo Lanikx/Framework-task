@@ -32,7 +32,7 @@ namespace OnlinerTests.PageObjects
 
         public bool IsLogoPresent()
         {
-            return OnlinerLogo.Displayed; 
+            return OnlinerLogo.IsDisplayed(); 
         }
 
         public void ClickElectronicsSection()
@@ -52,7 +52,7 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return PageTitle.Displayed;
+            return PageTitle.IsDisplayed();
         }
 
         public void ClickSignInButton()

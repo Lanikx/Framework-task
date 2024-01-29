@@ -11,7 +11,7 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return CartTitle.Displayed;
+            return CartTitle.IsDisplayed();
         }
 
         public string GetFirstItemName()

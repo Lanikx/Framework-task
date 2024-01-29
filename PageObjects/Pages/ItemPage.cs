@@ -13,7 +13,7 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return ItemTitleHeader.Displayed;
+            return ItemTitleHeader.IsDisplayed();
         }
 
         public void ClickFirstAddToBasket()

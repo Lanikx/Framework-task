@@ -21,7 +21,7 @@ namespace OnlinerTests.PageObjects.Basic
 
         public static void Start()
         {
-            Driver = CreateDriver(); 
+            Driver = CreateDriver();
             MaximizeWindow();
         }
 
