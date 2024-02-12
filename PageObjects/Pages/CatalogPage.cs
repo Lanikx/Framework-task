@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using OnlinerTests.PageObjects.Basic;
+using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
@@ -6,38 +7,37 @@ namespace OnlinerTests.PageObjects
 {
     public class CatalogPage : BasePage
     {
-        public CatalogPage() : base() { }
+        private const string ManufacturerSelectOptionXpath = "//div[@class='catalog-form__line catalog-form__line_condensed-other']/ul//div[contains(text(),'{0}')]";
 
-        private const string ManufacturerSelectOptionXpath = "//div[@class='schema-filter__facet']/ul//span[contains(text(),'{0}')]";
+        private const string SortByOptionXpath = "//option[contains(text(),'{0}')]";
 
-        private const string SortByOption = "//div[contains(@class,'schema-order__item')]/span[contains(text(),'{0}')]";
+        private readonly By ItemsPriceElementXpath = By.XPath("//a[@class='schema-product__price-value schema-product__price-value_primary js-product-price-link']");
+        
+        private WebElement CatalogPageHeader => new WebElement(By.XPath("//h1[@class='catalog-form__title catalog-form__title_big-alter']"));
 
-        private WebElement CellphoneHeader => new WebElement(By.XPath("//h1[contains(text(),'Мобильные телефоны')]"));
+        private WebElement SortingOptionElement => new WebElement(By.XPath("//div[contains(text(),'Сначала популярные')]/following-sibling::select"));
 
-        private WebElement SortingOption => new WebElement(By.XPath("//a[@class='schema-order__link']"));
+        private WebElement FirstItemProposesElement => new WebElement(By.XPath("//div/a[contains(text(), 'предлож')]"));
 
-        private WebElement FirstItemProposes => new WebElement(By.XPath("//div/a[contains(text(), 'предлож')]"));
+        private WebElement ItemNameElement => new WebElement(By.XPath("//div[contains(@class,'catalog-form__description_base-additional')]/a"));
 
-        private WebElement ItemName => new WebElement(By.XPath("//span[@data-bind='html: product.extended_name || product.full_name']"));
-
-        private WebElement ItemsPrice => new WebElement(By.XPath("//a[@class='schema-product__price-value schema-product__price-value_primary js-product-price-link']"));
 
         public void ClickOnSortingOption()
         {
-            SortingOption.Click();
+            SortingOptionElement.ClickViaJS();
         }
 
         public void SelectManufacturer(string manufacturerName)
         {
             var manufacturerSelectOption = new WebElement(By.XPath(string.Format(ManufacturerSelectOptionXpath, manufacturerName)));
-            manufacturerSelectOption.Click();
+            manufacturerSelectOption.ClickViaActions();
         }
 
         public void SelectSortingBy(string option)
         {
-            var sortByOption = new WebElement(By.XPath(string.Format(SortByOption, option)));
-            sortByOption.WaitIsDisplayed();
-            sortByOption.Click();
+            var sortByOption = new WebElement(By.XPath(string.Format(SortByOptionXpath, option)));
+            sortByOption.WaitIsVisible();
+            sortByOption.ClickViaJS();
         }
 
         public void ScrollManufacturersOptionIntoView(string manufacturerName)
@@ -48,25 +48,25 @@ namespace OnlinerTests.PageObjects
 
         public override bool IsOnPage()
         {
-            return CellphoneHeader.IsDisplayed();
+            return CatalogPageHeader.IsDisplayed();
         }
 
         public IEnumerable<double> GetItemsPrices()
         {
             Regex regex = new Regex("[0-9]+,[0-9]+", RegexOptions.IgnoreCase);
-            var priceElements = ItemsPrice.Elements;
-            var itemsPrices = from price in ItemsPrice.Elements select double.Parse(regex.Match(price.Text).Value);
+            var priceElements = _currentDriver.FindWebElements(ItemsPriceElementXpath);
+            var itemsPrices = from priceElement in priceElements select double.Parse(regex.Match(priceElement.GetText()).Value);
             return itemsPrices;
         }
 
         public string GetFirstItemName()
         {
-            return ItemName.GetText();
+            return ItemNameElement.GetText();
         }
 
         public void ClickFirstItemProposesButton()
         {
-            FirstItemProposes.Click();
+            FirstItemProposesElement.Click();
         }
     }
 }

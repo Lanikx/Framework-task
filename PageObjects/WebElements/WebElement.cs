@@ -5,7 +5,6 @@ namespace OnlinerTests.PageObjects.Basic
     public class WebElement
     {
         private IWebElement _element;
-        private List<IWebElement> _elements;
         private static IWebDriver _currentDriver => WebDriverProvider.Driver;
         private By _strategy;
 
@@ -19,44 +18,44 @@ namespace OnlinerTests.PageObjects.Basic
                 }
                 return _element;
             }
-        }
-
-        public List<IWebElement> Elements
-        {
-            get
-            {
-                if (_elements.Count == 0)
-                {
-                    InitElements();
-                }
-                return _elements;
-            }
-        }
+        }       
 
         public WebElement(By strategy)
         {
             _strategy = strategy;
         }
 
-        private void InitElement()
+        internal WebElement(IWebElement element)
         {
-            _currentDriver.GetWait().Until(drv => drv.FindElements(_strategy).Count() != 0);
-            _element = _currentDriver.FindElement(_strategy);
+            _element = element;
         }
 
-        private void InitElements()
-        {
-            _currentDriver.GetWait().Until(drv => drv.FindElements(_strategy).Count() != 0);
-            _elements = _currentDriver.FindElements(_strategy).ToList();
+        private void InitElement()
+        {            
+            WaitIsPresentOnPage();
+            _element = _currentDriver.FindElement(_strategy);
         }
 
         public bool IsEnabled() => Element.Enabled;
 
         public bool IsDisplayed() => Element.Displayed;
 
-        public void Click()
+        public string GetText() => Element.Text;
+
+        public void ClickViaActions()
         {
             _currentDriver.GetActions().Click(Element).Perform();
+        }
+
+        public void ClickViaJS()
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)_currentDriver;
+            executor.ExecuteScript("arguments[0].click();", Element);
+        }
+
+        public void Click()
+        {
+            Element.Click();
         }
 
         public void ScrollToElement()
@@ -71,17 +70,22 @@ namespace OnlinerTests.PageObjects.Basic
 
         public void Clear()
         {
-            Element.Clear();
+            _element.Clear();
         }
 
-        public void WaitIsDisplayed()
+        public void WaitIsPresentOnPage()
         {
-            _currentDriver.GetWait().Until(el => Element.Displayed);
+            _currentDriver.GetWait().Until(drv => drv.FindElements(_strategy).Count() != 0);
         }
 
-        public string GetText()
+        public void WaitIsVisible()
         {
-            return Element.Text;
+            _currentDriver.GetWait().Until(drv => _element.Displayed);
+        }
+
+        public void WaitIsEnabled()
+        {
+            _currentDriver.GetWait().Until(drv => _element.Enabled);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace OnlinerTests.PageObjects
     {
         private WebElement ItemTitleHeader => new WebElement(By.XPath("//h1[@class = 'catalog-masthead__title js-nav-header']"));
 
-        private WebElement FirstAddToBasket => new WebElement(By.XPath("//div[contains(@class,'offers-list__control offers-list__control_default helpers_hide_tablet')]/a[contains(text(),'В корзину')]"));
+        private WebElement FirstAddToBasketElement => new WebElement(By.XPath("//div[contains(@class,'offers-list__control offers-list__control_default helpers_hide_tablet')]/a[contains(text(),'В корзину')]"));
 
         private WebElement GoToBasketButton => new WebElement(By.XPath("//div[@class='product-recommended__sidebar-overflow']//a[contains(text(),'Перейти в корзину')]"));
 
@@ -18,7 +18,7 @@ namespace OnlinerTests.PageObjects
 
         public void ClickFirstAddToBasket()
         {
-            FirstAddToBasket.Click();
+            FirstAddToBasketElement.Click();
         }
 
         public void ClickGoToBasket()

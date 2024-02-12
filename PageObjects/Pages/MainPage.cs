@@ -1,58 +1,51 @@
-﻿using IWebDriver = OpenQA.Selenium.IWebDriver;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
-using OnlinerTests.PageObjects.Basic;
 
 namespace OnlinerTests.PageObjects
 {
     public class MainPage : BasePage
     {
-        private static IWebDriver _driver = WebDriverProvider.Driver;
+        private WebElement PageTitleElement => new WebElement(By.XPath("//div[@class='catalog-navigation__title' and contains(text(),'Каталог')]"));
 
-        public MainPage() : base()
-        {
-            _driver.Navigate().GoToUrl("https://catalog.onliner.by/");
-        }
+        private WebElement ElectronicsSectionElement => new WebElement(By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
 
-        private WebElement PageTitle => new WebElement(By.XPath("//div[@class='catalog-navigation__title' and contains(text(),'Каталог')]"));
+        private WebElement OnlinerLogoElement => new WebElement(By.XPath("//div/a/img[@class='onliner_logo']"));
 
-        private WebElement ElectronicsSection => new WebElement(By.XPath("//span[@class='catalog-navigation-classifier__item-title']/*[text()='Электроника']/.."));
+        private WebElement PhonesAndAccessoriesSubsectionElement => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
 
-        private WebElement OnlinerLogo => new WebElement(By.XPath("//div/a/img[@class='onliner_logo']"));
+        private WebElement VideoGamesSubSectionElement => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(), 'Видеоигры')]"));
 
-        private WebElement PhonesAndAccessoriesSubsection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(),'Мобильные')]"));
+        private WebElement SmartphonesSubSubSectionElement => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
 
-        private WebElement VideoGamesSubSection => new WebElement(By.XPath("//div[@class='catalog-navigation-list__aside-title' and contains(text(), 'Видеоигры')]"));
-
-        private WebElement SmartphonesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Мобильные')]/..//span[contains(text(), 'Смартфоны')]"));
-
-        private WebElement GameConsolesSubSubSection => new WebElement(By.XPath("//div[contains(text(),'Видеоигры')]/..//span[contains(text(), 'Игровые приставки')]"));
+        private WebElement GameConsolesSubSubSectionElement => new WebElement(By.XPath("//div[contains(text(),'Видеоигры')]/..//span[contains(text(), 'Игровые приставки')]"));
 
         private WebElement SignInButton => new WebElement(By.XPath("//div[contains(text(),'Вход')]"));
 
+        private WebElement CookieAgreeButton => new WebElement(By.XPath("//p[@class='fc-button-label' and contains(text(), 'Соглашаюсь')]"));
+
         public bool IsLogoPresent()
         {
-            return OnlinerLogo.IsDisplayed(); 
+            return OnlinerLogoElement.IsDisplayed();
         }
 
         public void ClickElectronicsSection()
         {
-            ElectronicsSection.Click();
+            ElectronicsSectionElement.Click();
         }
 
         public void ClickPhonesAndAccessoriesSubsection()
         {
-            PhonesAndAccessoriesSubsection.Click();
+            PhonesAndAccessoriesSubsectionElement.Click();
         }
 
         public void ClickSmartphonesSubSubSection()
         {
-            SmartphonesSubSubSection.Click();
+            SmartphonesSubSubSectionElement.Click();
         }
 
         public override bool IsOnPage()
         {
-            return PageTitle.IsDisplayed();
+            return PageTitleElement.IsDisplayed();
         }
 
         public void ClickSignInButton()
@@ -62,13 +55,18 @@ namespace OnlinerTests.PageObjects
 
         public void ClickVideoGamesSubSection()
         {
-            VideoGamesSubSection.WaitIsDisplayed();
-            VideoGamesSubSection.Click();
+            VideoGamesSubSectionElement.WaitIsVisible();
+            VideoGamesSubSectionElement.Click();
         }
 
         public void ClickGameConsolesSubSubSection()
         {
-            GameConsolesSubSubSection.Click();
+            GameConsolesSubSubSectionElement.Click();
+        }
+
+        public void CloseCookiePrompt()
+        {
+            CookieAgreeButton.Click();
         }
     }
 }

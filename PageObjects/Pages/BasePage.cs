@@ -1,10 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using OnlinerTests.PageObjects.Basic;
+using OpenQA.Selenium;
 
 namespace OnlinerTests.PageObjects
 {
     public abstract class BasePage
     {
-        public BasePage() { }
+        protected static IWebDriver _currentDriver => WebDriverProvider.Driver;
 
         public abstract bool IsOnPage();
     }

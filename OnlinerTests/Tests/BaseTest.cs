@@ -1,15 +1,24 @@
 ﻿using NUnit.Framework;
 using OnlinerTests.PageObjects.Basic;
 using OpenQA.Selenium;
+using PageObjects.Config;
 
 namespace OnlinerTests.Tests
 {
     public class BaseTest
     {
+        protected TestDataConfig config = new TestDataConfig();
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
+        {           
+            WebDriverProvider.Start();            
+        }
+
+        [SetUp]
+        public void SetUp() 
         {
-            WebDriverProvider.Start();
+            WebDriverProvider.Driver.Navigate().GoToUrl("https://catalog.onliner.by/");
         }
 
         [TearDown]
