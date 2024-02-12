@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 using OnlinerTests.PageObjects;
 
 namespace OnlinerTests.Tests
@@ -11,10 +12,12 @@ namespace OnlinerTests.Tests
             var mainPage = new MainPage();
             var isOnMainPage = mainPage.IsOnPage();
             mainPage.CloseCookiePrompt();
+            logger.LogInformation("User closed cookie prompt");
             Assert.IsTrue(isOnMainPage, "User is not on main page");
             mainPage.ClickElectronicsSection();
             mainPage.ClickPhonesAndAccessoriesSubsection();
             mainPage.ClickSmartphonesSubSubSection();
+            logger.LogInformation("User moved to catalog");
             var catalogPage = new CatalogPage();
             var isOnCatalogPage = catalogPage.IsOnPage();
             Assert.IsTrue(isOnCatalogPage, "User is not on catalog page");
@@ -22,8 +25,10 @@ namespace OnlinerTests.Tests
             catalogPage.SelectManufacturer("Xiaomi");
             catalogPage.ClickOnSortingOption();
             catalogPage.SelectSortingBy("Дорогие");
+            logger.LogInformation("User selected sorting");
             var priceCollection = catalogPage.GetItemsPrices();
             CollectionAssert.IsOrdered(priceCollection.Reverse(), "Price collection isn't ordered or empty");
+            logger.LogInformation("User asserted that sorting is correct");
         }
 
         [TestCase]
