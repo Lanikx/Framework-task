@@ -1,5 +1,4 @@
-﻿using OnlinerTests.PageObjects.Basic;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
 
@@ -54,8 +53,8 @@ namespace OnlinerTests.PageObjects
         public IEnumerable<double> GetItemsPrices()
         {
             Regex regex = new Regex("[0-9]+,[0-9]+", RegexOptions.IgnoreCase);
-            var priceElements = _currentDriver.FindWebElements(ItemsPriceElementXpath);
-            var itemsPrices = from priceElement in priceElements select double.Parse(regex.Match(priceElement.GetText()).Value);
+            var priceElements = _currentDriver.FindElements(ItemsPriceElementXpath);
+            var itemsPrices = from priceElement in priceElements select double.Parse(regex.Match(priceElement.Text).Value);
             return itemsPrices;
         }
 
