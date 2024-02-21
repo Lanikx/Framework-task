@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System.Text.RegularExpressions;
-using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
+using WebElement = PageObjects.Framework.WebElements.WebElement;
 
 namespace OnlinerTests.PageObjects
 {

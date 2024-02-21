@@ -1,28 +1,28 @@
 ﻿using Microsoft.Extensions.Logging;
 using NUnit.Framework;
-using OnlinerTests.PageObjects.Basic;
 using OpenQA.Selenium;
 using PageObjects.Config;
+using PageObjects.Framework.WebDriver;
 
 namespace OnlinerTests.Tests
 {
     public class BaseTest
     {
-        protected TestDataConfig config = new TestDataConfig();
+        protected TestDataConfig testDataConfig = new TestDataConfig();
         protected ILogger logger;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
-        {           
-            WebDriverProvider.Start(); 
+        {
+            ChromeDriverProvider.GetDriver();
             using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
-            logger = factory.CreateLogger("Test run");   
+            logger = factory.CreateLogger("Test run");
         }
 
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
-            WebDriverProvider.Driver.Navigate().GoToUrl("https://catalog.onliner.by/");
+            ChromeDriverProvider.GetDriver().Navigate().GoToUrl("https://catalog.onliner.by/");
             logger.LogInformation("Driver started");
             logger.LogInformation(TestContext.CurrentContext.Test.Name);
         }
@@ -30,7 +30,7 @@ namespace OnlinerTests.Tests
         [TearDown]
         public void TearDown()
         {
-            Screenshot ss = ((ITakesScreenshot)WebDriverProvider.Driver).GetScreenshot();
+            Screenshot ss = ((ITakesScreenshot)ChromeDriverProvider.GetDriver()).GetScreenshot();
             var testName = TestContext.CurrentContext.Test.Name;
             string Runname = testName + " " + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string screenshotfilename = "D:\\screenshots\\" + Runname + ".jpg";
@@ -41,8 +41,7 @@ namespace OnlinerTests.Tests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            WebDriverProvider.Quit();
-            
+            ChromeDriverProvider.GetDriver().Quit();
         }
     }
 }

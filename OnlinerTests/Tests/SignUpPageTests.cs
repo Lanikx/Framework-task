@@ -13,17 +13,17 @@ namespace OnlinerTests.Tests
             mainPage.ClickSignInButton();
             SignUpPage signUpPage = new SignUpPage();
             signUpPage.ClickGoToRegisterForm();
-            signUpPage.InputEmail(config.Data["badEmail"]);
+            signUpPage.InputEmail(testDataConfig.Data["badEmail"]);
             var emailErrorPresent = signUpPage.IsEmailErrorPresent();
             Assert.IsTrue(emailErrorPresent);
             signUpPage.ClearEmail();
-            signUpPage.InputPassword(config.Data["badPassword"]);
+            signUpPage.InputPassword(testDataConfig.Data["badPassword"]);
             var paswordErrorPresent = signUpPage.IsPasswordErrorPresent();
             Assert.IsTrue(paswordErrorPresent);
             signUpPage.ClearPassword();
-            signUpPage.InputEmail(config.Data["goodEmail"]);
-            signUpPage.InputPassword(config.Data["goodPassword1"]);
-            signUpPage.InputPasswordRepeat(config.Data["goodPassword2"]);
+            signUpPage.InputEmail(testDataConfig.Data["goodEmail"]);
+            signUpPage.InputPassword(testDataConfig.Data["goodPassword1"]);
+            signUpPage.InputPasswordRepeat(testDataConfig.Data["goodPassword2"]);
             var dontMatchPresent = signUpPage.IsPasswordsDontMatchErrorPresent();
             Assert.IsTrue(dontMatchPresent);    
         }

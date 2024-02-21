@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium;
+using PageObjects.Framework.WebDriver;
 
-namespace OnlinerTests.PageObjects.Basic
+namespace PageObjects.Framework.WebElements
 {
     public class WebElement
     {
         private IWebElement _element;
-        private static IWebDriver _currentDriver => WebDriverProvider.Driver;
+        private static IWebDriver _currentDriver => ChromeDriverProvider.GetDriver();
         private By _strategy;
 
         public IWebElement Element
@@ -18,7 +19,7 @@ namespace OnlinerTests.PageObjects.Basic
                 }
                 return _element;
             }
-        }       
+        }
 
         public WebElement(By strategy)
         {
@@ -31,7 +32,7 @@ namespace OnlinerTests.PageObjects.Basic
         }
 
         private void InitElement()
-        {            
+        {
             WaitIsPresentOnPage();
             _element = _currentDriver.FindElement(_strategy);
         }
