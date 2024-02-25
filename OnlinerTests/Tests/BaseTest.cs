@@ -14,7 +14,7 @@ namespace OnlinerTests.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            ChromeDriverProvider.GetDriver();
+            DriverFactory.GetDriver(WebDriverTypes.Chrome);
             using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
             logger = factory.CreateLogger("Test run");
         }
@@ -22,7 +22,7 @@ namespace OnlinerTests.Tests
         [SetUp]
         public void SetUp()
         {
-            ChromeDriverProvider.GetDriver().Navigate().GoToUrl("https://catalog.onliner.by/");
+            DriverFactory.GetDriver(WebDriverTypes.Chrome).Navigate().GoToUrl("https://catalog.onliner.by/");
             logger.LogInformation("Driver started");
             logger.LogInformation(TestContext.CurrentContext.Test.Name);
         }
@@ -30,7 +30,7 @@ namespace OnlinerTests.Tests
         [TearDown]
         public void TearDown()
         {
-            Screenshot ss = ((ITakesScreenshot)ChromeDriverProvider.GetDriver()).GetScreenshot();
+            Screenshot ss = ((ITakesScreenshot)DriverFactory.GetDriver(WebDriverTypes.Chrome)).GetScreenshot();
             var testName = TestContext.CurrentContext.Test.Name;
             string Runname = testName + " " + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string screenshotfilename = "D:\\screenshots\\" + Runname + ".jpg";
@@ -41,7 +41,7 @@ namespace OnlinerTests.Tests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            ChromeDriverProvider.GetDriver().Quit();
+            DriverFactory.GetDriver(WebDriverTypes.Chrome).Quit();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace PageObjects.Framework.WebElements
     public class WebElement
     {
         private IWebElement _element;
-        private static IWebDriver _currentDriver => ChromeDriverProvider.GetDriver();
+        private static IWebDriver _currentDriver => DriverFactory.GetDriver(WebDriverTypes.Chrome);
         private By _strategy;
 
         public IWebElement Element
