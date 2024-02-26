@@ -2,8 +2,8 @@
 
 namespace PageObjects.Framework.WebDriverCreators
 {
-    internal abstract class DriverCreator
+    public abstract class DriverCreator
     {
-        internal abstract IWebDriver CreateDriver();
+        public abstract IWebDriver CreateDriver();
     }
 }

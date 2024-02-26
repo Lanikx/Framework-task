@@ -1,12 +1,13 @@
 ﻿using OpenQA.Selenium;
 using PageObjects.Framework.WebDriver;
+using PageObjects.Framework.WebDriverCreators;
 
 namespace PageObjects.Framework.WebElements
 {
     public class WebElement
     {
         private IWebElement _element;
-        private static IWebDriver _currentDriver => DriverFactory.GetDriver(WebDriverTypes.Chrome);
+        private static IWebDriver _currentDriver => DriverFactory.GetDriver();
         private By _strategy;
 
         public IWebElement Element

@@ -3,6 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using PageObjects.Config;
 using PageObjects.Framework.WebDriver;
+using PageObjects.Framework.WebDriverCreators;
 
 namespace OnlinerTests.Tests
 {
@@ -14,7 +15,7 @@ namespace OnlinerTests.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            DriverFactory.GetDriver(WebDriverTypes.Chrome);
+            DriverFactory.GetDriver();
             using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsole());
             logger = factory.CreateLogger("Test run");
         }
@@ -22,7 +23,7 @@ namespace OnlinerTests.Tests
         [SetUp]
         public void SetUp()
         {
-            DriverFactory.GetDriver(WebDriverTypes.Chrome).Navigate().GoToUrl("https://catalog.onliner.by/");
+            DriverFactory.GetDriver().Navigate().GoToUrl("https://catalog.onliner.by/");
             logger.LogInformation("Driver started");
             logger.LogInformation(TestContext.CurrentContext.Test.Name);
         }
@@ -30,18 +31,18 @@ namespace OnlinerTests.Tests
         [TearDown]
         public void TearDown()
         {
-            Screenshot ss = ((ITakesScreenshot)DriverFactory.GetDriver(WebDriverTypes.Chrome)).GetScreenshot();
+            Screenshot ss = ((ITakesScreenshot)DriverFactory.GetDriver()).GetScreenshot();
             var testName = TestContext.CurrentContext.Test.Name;
             string Runname = testName + " " + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string screenshotfilename = "D:\\screenshots\\" + Runname + ".jpg";
-            ss.SaveAsFile(screenshotfilename, ScreenshotImageFormat.Jpeg);
+            ss.SaveAsFile(screenshotfilename);
             logger.LogInformation("Tear down completed");
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            DriverFactory.GetDriver(WebDriverTypes.Chrome).Quit();
+            DriverFactory.GetDriver().Quit();
         }
     }
 }

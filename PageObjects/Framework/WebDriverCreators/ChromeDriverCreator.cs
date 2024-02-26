@@ -3,9 +3,9 @@ using OpenQA.Selenium.Chrome;
 
 namespace PageObjects.Framework.WebDriverCreators
 {
-    internal class ChromeDriverCreator : DriverCreator
+    public class ChromeDriverCreator : DriverCreator
     {
-        internal override IWebDriver CreateDriver()
+        public override IWebDriver CreateDriver()
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("disable-gpu");

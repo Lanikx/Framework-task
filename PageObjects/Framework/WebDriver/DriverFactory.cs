@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using PageObjects.Config;
 using PageObjects.Framework.WebDriverCreators;
 
 namespace PageObjects.Framework.WebDriver
@@ -10,21 +11,22 @@ namespace PageObjects.Framework.WebDriver
         private static ThreadLocal<IWebDriver> _storedDriver = new ThreadLocal<IWebDriver>();
         private DriverFactory() { }
 
-        private static IWebDriver Create(WebDriverTypes webDriverType)
+        private static IWebDriver Create(string driverType)
         {
-            switch (webDriverType)
+            switch (driverType.ToLower())
             {
-                case WebDriverTypes.Chrome: return new ChromeDriverCreator().CreateDriver();
-                case WebDriverTypes.FireFox: return new FireFoxDriverCreator().CreateDriver();
+                case "chrome": return new ChromeDriverCreator().CreateDriver();
+                case "firefox": return new FireFoxDriverCreator().CreateDriver();
                 default: return new ChromeDriverCreator().CreateDriver();
             }
         }
 
-        public static IWebDriver GetDriver(WebDriverTypes webDriverType)
+        public static IWebDriver GetDriver()
         {
             if (_storedDriver.Value == null)
             {
-                _storedDriver.Value = Create(webDriverType);
+                DriverConfig driverConfig = new DriverConfig();
+                _storedDriver.Value = Create(driverConfig.Data["type"]);
             }
             return _storedDriver.Value;
         }

@@ -3,9 +3,9 @@ using OpenQA.Selenium.Firefox;
 
 namespace PageObjects.Framework.WebDriverCreators
 {
-    internal class FireFoxDriverCreator : DriverCreator
+    public class FireFoxDriverCreator : DriverCreator
     {
-        internal override IWebDriver CreateDriver()
+        public override IWebDriver CreateDriver()
         {
             FirefoxOptions options = new FirefoxOptions();
             options.AddArgument("disable-gpu");
