@@ -7,7 +7,9 @@ namespace PageObjects.Framework.WebElements
     public class WebElement
     {
         private IWebElement _element;
+
         private static IWebDriver _currentDriver => DriverFactory.GetDriver();
+
         private By _strategy;
 
         public IWebElement Element

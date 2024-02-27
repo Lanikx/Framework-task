@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using PageObjects.Config;
+using PageObjects.Framework.Utils;
 using PageObjects.Framework.WebDriver;
-using PageObjects.Framework.WebDriverCreators;
 
 namespace OnlinerTests.Tests
 {

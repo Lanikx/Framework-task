@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace PageObjects.Config
+namespace PageObjects.Framework.Utils
 {
     public class TestDataConfig
     {

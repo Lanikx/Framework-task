@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using PageObjects.Framework.WebDriver;
-using PageObjects.Framework.WebDriverCreators;
 
 namespace OnlinerTests.PageObjects
 {

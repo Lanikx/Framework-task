@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace PageObjects.Config
+namespace PageObjects.Framework.Utils
 {
-    public class LoggingSettingsReader
+    public class LoggingSettingsConfig
     {
         private IConfigurationRoot _configData;
 
