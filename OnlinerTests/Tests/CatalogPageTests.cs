@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 using OnlinerTests.PageObjects;
 
 namespace OnlinerTests.Tests
@@ -9,35 +10,50 @@ namespace OnlinerTests.Tests
         public void SortByPriceTest()
         {
             var mainPage = new MainPage();
-            Assert.IsTrue(mainPage.IsOnPage(), "User is not on main page");
+            var isOnMainPage = mainPage.IsOnPage();
+            mainPage.CloseCookiePrompt();
+            logger.LogInformation("User closed cookie prompt");
+            Assert.IsTrue(isOnMainPage, "User is not on main page");
             mainPage.ClickElectronicsSection();
             mainPage.ClickPhonesAndAccessoriesSubsection();
             mainPage.ClickSmartphonesSubSubSection();
+            logger.LogInformation("User moved to catalog");
             var catalogPage = new CatalogPage();
-            Assert.IsTrue(catalogPage.IsOnPage(), "User is not on catalog page");
+            var isOnCatalogPage = catalogPage.IsOnPage();
+            Assert.IsTrue(isOnCatalogPage, "User is not on catalog page");
             catalogPage.ScrollManufacturersOptionIntoView("Xiaomi");
             catalogPage.SelectManufacturer("Xiaomi");
             catalogPage.ClickOnSortingOption();
             catalogPage.SelectSortingBy("Дорогие");
+            logger.LogInformation("User selected sorting");
             var priceCollection = catalogPage.GetItemsPrices();
-            CollectionAssert.IsOrdered(priceCollection.Reverse());
+            CollectionAssert.IsOrdered(priceCollection.Reverse(), "Price collection isn't ordered or empty");
+            logger.LogInformation("User asserted that sorting is correct");
         }
 
         [TestCase]
         public void AddItemToBasketTest()
         {
             var mainPage = new MainPage();
+            var isOnMainPage = mainPage.IsOnPage();
+            mainPage.CloseCookiePrompt();
+            Assert.IsTrue(isOnMainPage, "User is not on main page");
             mainPage.ClickElectronicsSection();
             mainPage.ClickVideoGamesSubSection();
             mainPage.ClickGameConsolesSubSubSection();
             var catalogPage = new CatalogPage();
+            var isOnCatalogPage = catalogPage.IsOnPage();
+            Assert.IsTrue(isOnCatalogPage, "User is not on catalog page");
             var itemCatalogName = catalogPage.GetFirstItemName();
             catalogPage.ClickFirstItemProposesButton();
             var itemPage = new ItemPage();
+            var isOnItemPage = itemPage.IsOnPage();
+            Assert.IsTrue(isOnItemPage, "User is not on item page");
             itemPage.ClickFirstAddToBasket();
             itemPage.ClickGoToBasket();
             var cartPage = new CartPage();
-            cartPage.IsOnPage();
+            var isOnCartPage = cartPage.IsOnPage();
+            Assert.IsTrue(isOnCartPage, "User is not on cart page");
             var cartItemName = cartPage.GetFirstItemName();
             Assert.That(cartItemName, Is.EqualTo(itemCatalogName));
         }

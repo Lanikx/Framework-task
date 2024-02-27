@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using WebElement = OnlinerTests.PageObjects.Basic.WebElement;
+using WebElement = PageObjects.Framework.WebElements.WebElement;
 
 namespace OnlinerTests.PageObjects
 {
@@ -11,13 +11,13 @@ namespace OnlinerTests.PageObjects
 
         private WebElement RegisterPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder,'Придумайте')]"));
 
-        private WebElement IncorrectEmailErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Некорректный e-mail')]"));
+        private WebElement IncorrectEmailErrorMessageElement => new WebElement(By.XPath("//div[contains(text(),'Некорректный e-mail')]"));
 
-        private WebElement ShortPasswordErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Минимум 8 ')]"));
+        private WebElement ShortPasswordErrorMessageElement => new WebElement(By.XPath("//div[contains(text(),'Минимум 8 ')]"));
 
         private WebElement RepeatPasswordInput => new WebElement(By.XPath("//input[contains(@placeholder, 'Повторите')]"));
 
-        private WebElement PasswordsDontMatchErrorMessage => new WebElement(By.XPath("//div[contains(text(),'Пароли не совпадают')]"));
+        private WebElement PasswordsDontMatchErrorMessageElement => new WebElement(By.XPath("//div[contains(text(),'Пароли не совпадают')]"));
 
         public void ClickGoToRegisterForm()
         {
@@ -46,12 +46,12 @@ namespace OnlinerTests.PageObjects
 
         public bool IsEmailErrorPresent()
         {
-            return IncorrectEmailErrorMessage.Displayed;
+            return IncorrectEmailErrorMessageElement.IsDisplayed();
         }
 
         public bool IsPasswordErrorPresent()
         {
-            return ShortPasswordErrorMessage.Displayed;
+            return ShortPasswordErrorMessageElement.IsDisplayed();
         }
 
         public void InputPasswordRepeat(string input)
@@ -61,7 +61,7 @@ namespace OnlinerTests.PageObjects
 
         public bool IsPasswordsDontMatchErrorPresent()
         {
-            return PasswordsDontMatchErrorMessage.Displayed;
+            return PasswordsDontMatchErrorMessageElement.IsDisplayed();
         }
     }
 }
